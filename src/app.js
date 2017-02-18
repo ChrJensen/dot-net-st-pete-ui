@@ -1,3 +1,6 @@
+/**
+ * electron app main entry point
+ */
 const electron = require('electron');
 // submodule :: application event lifecycle
 const app = electron.app;
