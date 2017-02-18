@@ -1,8 +1,13 @@
 const electron = require('electron');
-// import electron package submodule 'app'
+// submodule :: application event lifecycle
 const app = electron.app;
+// submodule :: create and control browser windows
+const BrowserWindow = electron.BrowserWindow;
 
 // electron onReady event
 app.on('ready', () => {
-  console.log('electron ready');
+  new BrowserWindow({
+    height: 500,
+    width: 500
+  });
 });
