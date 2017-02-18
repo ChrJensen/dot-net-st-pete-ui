@@ -4,7 +4,7 @@
   "description": "electron ui for dot net st pete meetup - march 7th, 2017",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app",
+    "start": "electron .",
     "test": "npm test"
   },
   "repository": {
