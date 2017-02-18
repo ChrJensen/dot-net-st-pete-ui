@@ -1,0 +1,29 @@
+{
+  "name": "dot-net-st-pete-ui",
+  "version": "1.0.0",
+  "description": "electron ui for dot net st pete meetup - march 7th, 2017",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnrhampton/dot-net-st-pete-ui.git"
+  },
+  "keywords": [
+    "electron",
+    "awesome",
+    "node",
+    "javascript"
+  ],
+  "author": "JRH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnrhampton/dot-net-st-pete-ui/issues"
+  },
+  "homepage": "https://github.com/johnrhampton/dot-net-st-pete-ui#readme",
+  "devDependencies": {
+    "electron": "^1.4.15"
+  }
+}
