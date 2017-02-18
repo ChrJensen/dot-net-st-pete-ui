@@ -19,7 +19,7 @@ app.on('ready', () => {
 
   // load the main view using the file protocol
   // we have access to the file system as we are running on the local OS
-  appWindow.loadURL(`file://${__dirname}/beer-journal/index.html`);
+  appWindow.loadURL(`file://${__dirname}/beer-journal/beer-journal.html`);
 
   // manage app window closed event
   appWindow.on('closed', () => {
