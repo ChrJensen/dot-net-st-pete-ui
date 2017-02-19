@@ -1,13 +1,13 @@
 /**
  * electron app main entry point
+ *
+ * submodules
+ *  app :: manage application event lifecycle
+ *  BrowserWindow :: create and control browser windows
+ *  Menu :: create native application menus and context menus
  */
 const electron = require('electron');
-// submodule :: application event lifecycle
-const app = electron.app;
-// submodule :: create and control browser windows
-const BrowserWindow = electron.BrowserWindow;
-// submodule :: create native application menus and context menus
-const Menu = electron.Menu;
+const { app, BrowserWindow, Menu } = electron;
 // menu template
 const menuTemplate = require('./app-menu');
 // electron app window
@@ -36,5 +36,3 @@ app.on('ready', () => {
     appWindow = null;
   });
 });
-
-
