@@ -6,6 +6,10 @@ const electron = require('electron');
 const app = electron.app;
 // submodule :: create and control browser windows
 const BrowserWindow = electron.BrowserWindow;
+// submodule :: create native application menus and context menus
+const Menu = electron.Menu;
+// menu template
+const menuTemplate = require('./app-menu');
 // electron app window
 let appWindow = null;
 
@@ -17,6 +21,11 @@ app.on('ready', () => {
     width: 500
   });
 
+  // build application menu
+  Menu.setApplicationMenu(
+    Menu.buildFromTemplate(menuTemplate)
+  );
+
   // load the main view using the file protocol
   // we have access to the file system as we are running on the local OS
   appWindow.loadURL(`file://${__dirname}/beer-journal/beer-journal.html`);
@@ -27,3 +36,5 @@ app.on('ready', () => {
     appWindow = null;
   });
 });
+
+
