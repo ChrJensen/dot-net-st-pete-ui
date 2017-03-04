@@ -30,9 +30,17 @@ app.on('ready', () => {
     Menu.buildFromTemplate(menuTemplate)
   );
 
+  // allows for local dev to point to localhost:3000 - set in ./config/start-electron
+  // allows production builds to point to electron app bundle
+  const loadURL = process.env.WEBPACK_DEV_SERVER || url.format({
+      pathname: path.join(__dirname, '/../build/index.html'),
+      protocol: 'file:',
+      slashes: true
+    });
+
   // load the main view using the file protocol
   // we have access to the file system as we are running on the local OS
-  appWindow.loadURL('http://localhost:3000');
+  appWindow.loadURL(loadURL);
 
   // if we are not in production, open the devtools
   if (process.env.NODE_ENV !== 'production') {
@@ -41,7 +49,6 @@ app.on('ready', () => {
 
   // manage app window closed event
   appWindow.on('closed', () => {
-    console.log('electron app closed');
     appWindow = null;
   });
 });
