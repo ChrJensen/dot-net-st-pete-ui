@@ -1,13 +1,14 @@
 /**
  * waits for webpack-dev-server to fire up and then starts up electron
  */
-const net = require('net');
 // foreman starts each job as its own process and offsets the port by 100
 // subtract 100 from the PORT to ensure that we stay in sync
 // https://github.com/strongloop/node-foreman#advanced-usage
 const port = process.env.PORT ? (process.env.PORT - 100) : 3000;
 // we use this during the dev process to connect to webpack-dev-server
 process.env.WEBPACK_DEV_SERVER = `http://localhost:${port}`;
+
+const net = require('net');
 // create new socket
 const socket = new net.Socket();
 let startedElectron = false;
