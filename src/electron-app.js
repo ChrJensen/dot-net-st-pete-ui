@@ -20,8 +20,8 @@ let appWindow = null;
 app.on('ready', () => {
   // instantiate browser window
   appWindow = new BrowserWindow({
-    height: 500,
-    width: 500,
+    height: 800,
+    width: 1200,
     resizable: false
   });
 
