@@ -1,11 +1,11 @@
 const electron = require('electron');
 // submodule :: application event lifecycle
-const app = electron.app;
+const { app } = electron;
 
 // retrieve product name from package.json
 // OS X convention to use this as main menu item
 // not viewable in dev mode - will always say Electron
-const productName = electron.app.getName();
+const productName = app.getName();
 
 // export menu template
 module.exports = [
