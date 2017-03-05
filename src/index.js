@@ -6,9 +6,10 @@ import './index.css';
 import App from './App';
 import BeerJournal from './BeerJournal';
 
-// material-design-lite
+// vendor styles
 import 'material-design-lite/dist/material.brown-blue.min.css';
-import 'material-design-lite/dist/material.min';
+import 'material-design-lite/dist/material';
+import 'js-snackbar/dist/snackbar.css';
 
 ReactDOM.render(
   <Router history={hashHistory}>
