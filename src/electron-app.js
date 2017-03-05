@@ -7,7 +7,7 @@
  *  Menu :: create native application menus and context menus
  */
 const electron = require('electron');
-const { app, BrowserWindow, Menu } = electron;
+const { app, BrowserWindow, Menu, ipcMain } = electron;
 // node
 const path = require('path');
 const url = require('url');
@@ -15,6 +15,10 @@ const url = require('url');
 const menuTemplate = require('./electron-app-menu');
 // electron app window
 let appWindow = null;
+// utility
+const StorageUtility = require('./utility/storage.utility');
+// init storage utility - future use
+const storage = new StorageUtility({ configName: 'user-preferences', defaults: { access_token: null } });
 
 // electron onReady event
 app.on('ready', () => {
@@ -60,4 +64,9 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+// handle storing user data
+ipcMain.on('login-successful', (event, arg) => {
+  storage.set('access_token', arg);
 });
