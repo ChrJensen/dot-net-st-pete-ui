@@ -70,3 +70,9 @@ app.on('window-all-closed', () => {
 ipcMain.on('login-successful', (event, arg) => {
   storage.set('access_token', arg);
 });
+
+// listen for access_token requests
+ipcMain.on('request-access-token', (event) => {
+  const access_token = storage.get('access_token');
+  event.sender.send('access-token-response', access_token);
+});
