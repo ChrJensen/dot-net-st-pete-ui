@@ -1,0 +1,62 @@
+/**
+ * loading style
+ */
+.loading-overlay .mdl-spinner {
+  height: 150px;
+  width: 150px;
+}
+
+.not-active {
+  visibility: hidden;
+}
+
+.page-loading {
+  z-index: 99999 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  opacity: .9;
+  pointer-events: auto;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.dissolve-animation.hide-remove {
+  display: inline !important;
+}
+
+.dissolve-animation.hide-remove,
+.dissolve-animation.hide-add {
+  -webkit-transition: 0.8s linear all;
+  -moz-transition: 0.8s linear all;
+  -o-transition: 0.8s linear all;
+  transition: 0.8s linear all;
+}
+
+.dissolve-animation.hide-remove.hide-remove-active,
+.dissolve-animation.hide-add {
+  opacity: 1;
+}
+
+.dissolve-animation.hide-add.hide-add-active,
+.dissolve-animation.hide-remove {
+  opacity: 0;
+}
