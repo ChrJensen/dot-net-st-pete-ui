@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
-const { remote } = window.require('electron');
-const { ipcRenderer } = window.require('electron');
+import { show } from 'js-snackbar';
+const { remote, ipcRenderer } = window.require('electron');
 import endpoints from '../constants/endpoints';
 import { post } from '../utility/fetch.utility';
 import Login from '../Login';
+import Loading from '../Loading';
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class App extends Component {
         type: 'warning',
         message: 'Email and Password are required'
       });
+      show({ text: 'Email and Password are required', backgroundColor: '#FF9800', pos: 'bottom-right' });
     } else {
       this.login(email, password);
     }
@@ -54,12 +56,17 @@ class App extends Component {
           this.setState({ loadingActive: false });
           ipcRenderer.send('login-successful', response.access_token);
           hashHistory.push('/beerJournal');
+        })
+        .catch(error => {
+          this.setState({ loadingActive: false });
+          console.log(error);
+          show({ text: 'Login failed', backgroundColor: '#F44336', pos: 'bottom-right' });
         });
     });
   }
 
   setStateField(field, value) {
-    let new_state = Object.assign({}, this.state);
+    let new_state = { ...this.state };
     new_state[field] = value;
     this.setState(new_state);
   }
@@ -68,11 +75,14 @@ class App extends Component {
     let { loadingActive, email, password } = this.state;
 
     return (
-      <Login loadingActive={loadingActive}
-             email={email}
-             password={password}
-             handleFieldChange={this.handleFieldChange}
-             handleLogin={this.handleLogin}/>
+      <div>
+        <Loading active={loadingActive}/>
+
+        <Login email={email}
+               password={password}
+               handleFieldChange={this.handleFieldChange}
+               handleLogin={this.handleLogin}/>
+      </div>
     );
   }
 }
