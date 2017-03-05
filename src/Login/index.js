@@ -1,15 +1,12 @@
 import React from 'react';
 import './login.css';
-import Loading from '../Loading';
 
-export default ({ loadingActive, email, password, handleFieldChange, handleLogin }) => (
+export default ({ email, password, handleFieldChange, handleLogin }) => (
   <div>
     <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <div id="login-container" className="android-content mdl-layout__content md">
         <div className="mdl-typography--text-center">
           <div className="mdl-layout__content login">
-            <Loading active={loadingActive}/>
-
             <div className="login-header">
               <h5>Welcome</h5>
             </div>
