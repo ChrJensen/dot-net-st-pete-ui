@@ -4,12 +4,37 @@
  */
 const fetch = require('node-fetch');
 
-export function post(url, body, options) {
-  let headers = { 'Content-Type': 'application/json' };
+/**
+ *
+ * @param url
+ * @param options
+ * @returns {Promise.<*>}
+ */
+export function get(url, options) {
+  let headers = setHeaders(options);
 
-  if (options && options.access_token) {
-    headers['Authorization'] = `Bearer ${options.access_token}`;
-  }
+  return fetch(url, {
+    method: 'GET',
+    headers
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(error => {
+      console.error(error);
+      throw new Error('could not get data');
+    });
+}
+
+/**
+ * handles POSTS via fetch
+ * @param url
+ * @param body
+ * @param options
+ * @returns {Promise.<*>}
+ */
+export function post(url, body, options) {
+  let headers = setHeaders(options);
 
   return fetch(url, {
     method: 'POST',
@@ -23,4 +48,19 @@ export function post(url, body, options) {
       console.error(error);
       throw new Error('could not post data');
     });
+}
+
+/**
+ * set request headers
+ * @param options
+ * @returns {Object}
+ */
+function setHeaders(options) {
+  let headers = { 'Content-Type': 'application/json' };
+
+  if (options && options.access_token) {
+    headers['Authorization'] = `Bearer ${options.access_token}`;
+  }
+
+  return headers;
 }
