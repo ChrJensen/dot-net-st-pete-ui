@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 const { ipcRenderer } = window.require('electron');
 import { show } from 'js-snackbar';
 import endpoints from '../constants/endpoints';
-import { post } from '../utility/fetch.utility';
+import { get, post } from '../utility/fetch.utility';
 import './beer-journal.css';
 import Loading from '../Loading';
 
@@ -18,30 +18,34 @@ class BeerJournal extends Component {
   constructor(props) {
     super(props);
 
-    // save our journal entry
-    const save = (access_token) => {
-      post(endpoints.JOURNAL.default, this.state.journalEntry, { access_token })
-        .then(() => {
-          this.setState({ loadingActive: false, journalEntry: { ...initialJournalEntry } });
-          show({ text: 'Journal Entry Saved!', backgroundColor: '#4CAF50', pos: 'bottom-right' });
-        })
-        .catch(error => {
-          console.error(error);
-          this.setState({ loadingActive: false });
-          show({ text: 'Could not save Journal Entry', backgroundColor: '#F44336', pos: 'bottom-right' });
+    const setToken = (access_token) => {
+      this.access_token = access_token;
+    };
+
+    const getEntries = () => {
+      get(endpoints.JOURNAL.default, { access_token: this.access_token })
+        .then(response => {
+          this.setState({ journalEntries: response });
         });
     };
 
     // handles response from main process with access token
     ipcRenderer.on('access-token-response', (event, access_token) => {
-      save(access_token);
+      setToken(access_token);
+      getEntries();
     });
   }
 
   state = {
     journalEntry: { ...initialJournalEntry },
-    loadingActive: false
+    loadingActive: false,
+    journalEntries: []
   };
+
+  componentWillMount() {
+    // request the users access_token
+    ipcRenderer.send('request-access-token');
+  }
 
   componentDidMount() {
     // eslint-disable-next-line
@@ -57,16 +61,31 @@ class BeerJournal extends Component {
     // todo: implement
   }
 
+  selectEntry(index) {
+    const selectedJournalEntry = this.state.journalEntries[index];
+    this.setState({ journalEntry: selectedJournalEntry });
+  }
+
   setJournalEntryField(field, value) {
     let new_state = { ...this.state };
     new_state['journalEntry'][field] = value;
     this.setState(new_state);
   }
 
-  requestAccessToken() {
-    this.setState({ loadingActive: true }, () => {
-      ipcRenderer.send('request-access-token');
-    });
+  save() {
+    this.setState({ loadingActive: true });
+
+    post(endpoints.JOURNAL.default, this.state.journalEntry, { access_token: this.access_token })
+      .then(() => {
+        let journalEntries = [...this.state.journalEntries, this.state.journalEntry];
+        this.setState({ loadingActive: false, journalEntry: { ...initialJournalEntry }, journalEntries });
+        show({ text: 'Journal Entry Saved!', backgroundColor: '#4CAF50', pos: 'bottom-right' });
+      })
+      .catch(error => {
+        console.error(error);
+        this.setState({ loadingActive: false });
+        show({ text: 'Could not save Journal Entry', backgroundColor: '#F44336', pos: 'bottom-right' });
+      });
   }
 
   // todo: our labels are not being reset properly via MDL, so using placeholder attributes
@@ -95,10 +114,21 @@ class BeerJournal extends Component {
               </div>
             </header>
             <nav className="navigation mdl-navigation mdl-color--blue-grey-800">
-              <a className="mdl-navigation__link">
-                <i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>
-                Home
-              </a>
+              {this.state.journalEntries.map((je, index) => {
+                {
+                  /* todo: update to use id for key - api returns full object id right now */
+                }
+                return (
+                  <a key={`beer_${index}`}
+                     className="mdl-navigation__link"
+                     onClick={() => this.selectEntry(index)}>
+                    <i className="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_drink</i>
+                    {je.beerName} @ {je.brewery}
+                    <br/>
+                    {new Date(je.sampleDate).toLocaleDateString()}
+                  </a>
+                );
+              })}
             </nav>
           </div>
 
@@ -108,6 +138,13 @@ class BeerJournal extends Component {
                 <div className="updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
                   <div className="mdl-card__title mdl-card--expand mdl-color--teal-300">
                     <h2 className="mdl-card__title-text">Journal Entry</h2>
+                    <div className="mdl-layout-spacer"></div>
+
+                    <button className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                            onClick={() => this.setState({ journalEntry: initialJournalEntry })}>
+                      <i className="material-icons">add</i>
+                    </button>
+
                   </div>
                   <div className="mdl-card__supporting-text mdl-color-text--grey-600">
                     <div className="mdl-textfield mdl-js-textfield">
@@ -156,7 +193,7 @@ class BeerJournal extends Component {
                   </div>
                   <div className="mdl-card__actions mdl-card--border">
                     <a className="mdl-button mdl-js-button mdl-js-ripple-effect"
-                       onClick={() => this.requestAccessToken()}>Save</a>
+                       onClick={() => this.save()}>Save</a>
                   </div>
                 </div>
               </div>
