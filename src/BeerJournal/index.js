@@ -62,8 +62,12 @@ class BeerJournal extends Component {
   }
 
   selectEntry(index) {
-    const selectedJournalEntry = this.state.journalEntries[index];
-    this.setState({ journalEntry: selectedJournalEntry });
+    const selectedJournalEntry = { ...this.state.journalEntries[index] };
+    selectedJournalEntry.sampleDate = '';
+    this.setState({ journalEntry: selectedJournalEntry }, () => {
+      // quick workaround to properly set the date in the html5 date picker input
+      document.getElementById('sample_date').valueAsDate = new Date(this.state.journalEntries[index].sampleDate);
+    });
   }
 
   setJournalEntryField(field, value) {
