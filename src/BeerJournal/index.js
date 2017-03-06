@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 const { ipcRenderer } = window.require('electron');
+import { hashHistory } from 'react-router';
 import { show } from 'js-snackbar';
 import endpoints from '../constants/endpoints';
 import { get, post } from '../utility/fetch.utility';
@@ -15,50 +16,29 @@ const initialJournalEntry = {
 };
 
 class BeerJournal extends Component {
-  constructor(props) {
-    super(props);
-
-    const setToken = (access_token) => {
-      this.access_token = access_token;
-    };
-
-    const getEntries = () => {
-      get(endpoints.JOURNAL.default, { access_token: this.access_token })
-        .then(response => {
-          this.setState({ journalEntries: response });
-        });
-    };
-
-    // handles response from main process with access token
-    ipcRenderer.on('access-token-response', (event, access_token) => {
-      setToken(access_token);
-      getEntries();
-    });
-  }
-
   state = {
     journalEntry: { ...initialJournalEntry },
     loadingActive: false,
     journalEntries: []
   };
 
-  componentWillMount() {
-    // request the users access_token
-    ipcRenderer.send('request-access-token');
-  }
-
   componentDidMount() {
     // eslint-disable-next-line
     componentHandler.upgradeDom();
-  }
 
-  componentDidUpdate() {
-    // eslint-disable-next-line
-    componentHandler.upgradeDom();
+    // request the users access_token
+    const access_token = ipcRenderer.sendSync('request-access-token');
+
+    // get all journal entries
+    get(endpoints.JOURNAL.default, { access_token })
+      .then(response => {
+        this.setState({ journalEntries: response, access_token });
+      });
   }
 
   logout() {
-    // todo: implement
+    ipcRenderer.send('request-logout');
+    hashHistory.push('/');
   }
 
   selectEntry(index) {
@@ -79,7 +59,7 @@ class BeerJournal extends Component {
   save() {
     this.setState({ loadingActive: true });
 
-    post(endpoints.JOURNAL.default, this.state.journalEntry, { access_token: this.access_token })
+    post(endpoints.JOURNAL.default, this.state.journalEntry, { access_token: this.state.access_token })
       .then(() => {
         let journalEntries = [...this.state.journalEntries, this.state.journalEntry];
         this.setState({ loadingActive: false, journalEntry: { ...initialJournalEntry }, journalEntries });
