@@ -71,8 +71,12 @@ ipcMain.on('login-successful', (event, arg) => {
   storage.set('access_token', arg);
 });
 
+// handle logout request
+ipcMain.on('request-logout', () => {
+  storage.set('access_token', null);
+});
+
 // listen for access_token requests
 ipcMain.on('request-access-token', (event) => {
-  const access_token = storage.get('access_token');
-  event.sender.send('access-token-response', access_token);
+  event.returnValue = storage.get('access_token');
 });
