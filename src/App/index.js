@@ -53,9 +53,10 @@ class App extends Component {
     this.setState({ loadingActive: true }, () => {
       post(endpoints.USER.login, { email, password })
         .then(response => {
-          this.setState({ loadingActive: false });
-          ipcRenderer.send('login-successful', response.access_token);
-          hashHistory.push('/beerJournal');
+          this.setState({ loadingActive: false }, () => {
+            ipcRenderer.send('login-successful', response.access_token);
+            hashHistory.push('/beerJournal');
+          });
         })
         .catch(error => {
           this.setState({ loadingActive: false });
