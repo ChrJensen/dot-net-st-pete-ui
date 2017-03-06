@@ -125,7 +125,7 @@ class BeerJournal extends Component {
                     <div className="mdl-layout-spacer"></div>
 
                     <button className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
-                            onClick={() => this.setState({ journalEntry: initialJournalEntry })}>
+                            onClick={() => this.setState({ journalEntry: { ...initialJournalEntry } })}>
                       <i className="material-icons">add</i>
                     </button>
 
