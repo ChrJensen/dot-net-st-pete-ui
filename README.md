@@ -17,7 +17,7 @@ Each `step-[x]` branch in this repository is a completed solution set.  The `REA
 # How we got here
 
 ## Initialize project and Install Electron package
-`npm init`
+`npm init` ( set main to `src/app.js` )
 
 `npm install electron --save-dev`
 
