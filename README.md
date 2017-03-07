@@ -44,7 +44,7 @@ ReactDOM.render(
 );
  ```
 
-## Update electron-app.js to store our access token, and interact with IPC. Let's also adjust our window size.
+## Update electron-app.js to store our access token and interact with IPC. Let's also adjust our window size.
 Adjust our window size
 ```javascript
 appWindow = new BrowserWindow({
@@ -54,11 +54,6 @@ appWindow = new BrowserWindow({
   });
 ```
 
-Add ipcMain to imports
-```javascript
-const { app, BrowserWindow, Menu, ipcMain } = electron;
-```
-
 Import and initialize storage utilities
 ```javascript
 // utility
@@ -66,6 +61,11 @@ const StorageUtility = require('./utility/storage.utility');
 
 // init storage utility - future use
 const storage = new StorageUtility({ configName: 'user-preferences', defaults: { access_token: null } });
+```
+
+Add ipcMain to imports
+```javascript
+const { app, BrowserWindow, Menu, ipcMain } = electron;
 ```
 
 Subscribe to events 
