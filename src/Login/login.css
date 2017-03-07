@@ -1,0 +1,30 @@
+.login {
+    position: relative;
+    width: 450px;
+    height: 325px;
+    overflow-y: hidden;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 190px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.login-paper {
+    width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#login_button.mdl-button {
+    margin: 12px 0 0 0;
+}
+
+.login-header {
+    padding: 20px 0 10px 0;
+    color: rgb(121, 85, 72);
+}
+
+#login-container {
+    background: url(./background.jpeg) top center no-repeat;
+    background-size: cover;
+}
