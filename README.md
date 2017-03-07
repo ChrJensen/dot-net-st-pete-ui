@@ -8,6 +8,7 @@ Each `step-[x]` branch in this repository is a completed solution set.  The `REA
 
 1. Sign up for a [GitHub](https://github.com) account
 1. Install [git](https://git-scm.com/downloads)
+1. Install node via [nvm](https://github.com/creationix/nvm)
 1. Fork `https://github.com/johnrhampton/dot-net-st-pete-ui` to your personal GitHub
 1. In a shell, execute `git clone https://github.com/[your GH username]/dot-net-st-pete-ui.git`
 1. In a shell, execute `cd dot-net-st-pete-ui`
