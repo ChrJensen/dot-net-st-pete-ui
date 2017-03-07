@@ -123,6 +123,10 @@ Create [`src/utility/storage.utility.js`](https://raw.githubusercontent.com/john
 
 Let's open up Postman to create a new user and login to our application.
 
+If we attempt to login with bad credentials, or no credentials, the app will notify us.
+
+Once we successfully login, we can add new beer journal entries and see all our previous entries.
+
 ## What's Missing?
 * Packaging our app for deployment
 * Ability to create a new user via the UI
@@ -131,3 +135,5 @@ Let's open up Postman to create a new user and login to our application.
 * Creating our own fork of react-scripts specifically built for Electron
 * Testing with mocha, chai, or any other preferred framework
 * Redux for state management
+* Retrieving journal entries per User vs all entries
+* Other stuff
