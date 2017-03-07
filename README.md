@@ -128,6 +128,7 @@ If we attempt to login with bad credentials, or no credentials, the app will not
 Once we successfully login, we can add new beer journal entries and see all our previous entries.
 
 ## What's Missing?
+* Edit Beer Journal Entry
 * Packaging our app for deployment
 * Ability to create a new user via the UI
 * Using Electron libraries for http requests - we are using node-fetch
