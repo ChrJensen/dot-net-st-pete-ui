@@ -45,6 +45,15 @@ ReactDOM.render(
  ```
 
 ## Update electron-app.js to store our access token, and interact with IPC. Let's also adjust our window size.
+Adjust our window size
+```javascript
+appWindow = new BrowserWindow({
+    height: 800,
+    width: 1200,
+    resizable: false
+  });
+```
+
 Add ipcMain to imports
 ```javascript
 const { app, BrowserWindow, Menu, ipcMain } = electron;
@@ -77,34 +86,46 @@ ipcMain.on('request-access-token', (event) => {
 });
 ```
 
-## Add public directory
-Create [`public/index.html`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-three/public/index.html?token=ADwMB3tc1n_g6preCBr6DQkoptroSNhwks5Yx1YuwA%3D%3D)
+## Enhance App/index.js to handle Login. Delete App/app.css and App/logo.svg
+Update contents of [`src/App/index.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/App/index.js?token=ADwMB1mVG4hXFREo8mcS6mk4S9UKMXM8ks5Yx2MuwA%3D%3D)
 
-## Add React app entry point
-Create [`src/index.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-three/src/index.js?token=ADwMBzfdKbwXxfHpWkvT4uBB6CM9lsLJks5Yx1aQwA%3D%3D)
+## Rename src/beer-journal => src/BeerJournal. Delete beer-journal.html
+Update contents of [`src/BeerJournal/beer-journal.css`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/BeerJournal/beer-journal.css?token=ADwMBzi7OYfWsCfdrQ5m7g67C5enrDBlks5Yx2OPwA%3D%3D)
 
-Create [`src/index.css`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-three/src/index.css?token=ADwMB8ERYWIomwvf-JNqpNagMc9zctcRks5Yx1a6wA%3D%3D)
+Update contents of [`src/BeerJournal/index.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/BeerJournal/index.js?token=ADwMB-YY0dtAxis7UUER3GkPqS5irPYgks5Yx2OvwA%3D%3D)
 
-## Add App component
-Create [`src/App/app.css`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-three/src/App/app.css?token=ADwMBzX3YoGGFvBzAS4x4X3egUWK0pb6ks5Yx1cEwA%3D%3D)
+## Add endpoints and environment constants
+Create [`src/constants/endpoints.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/constants/endpoints.js?token=ADwMB14VVxP9_6v4RqF9s0L-pLIzDO2xks5Yx2P-wA%3D%3D)
 
-Create [`src/App/index.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-three/src/App/index.js?token=ADwMBxrxghGoraah0t9o1RdqXZsN_ff7ks5Yx1cYwA%3D%3D)
+Create [`src/constants/environment.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/constants/environment.js?token=ADwMBzTyoBjt112xyT3ecNGtBRQATI6nks5Yx2QowA%3D%3D)
 
-Create [`src/App/logo.svg`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-three/src/App/logo.svg?token=ADwMB8uIsI3L5UIp4dUr5a3PoVdeLUygks5Yx1cmwA%3D%3D)
+## Add Loading component
+Create [`src/Loading/index.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/Loading/index.js?token=ADwMB654EmcV8uKzxlX1YgLrbuQaSw6Aks5Yx2RlwA%3D%3D)
+
+Create [`src/Loading/loading.css`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/Loading/loading.css?token=ADwMB5GOslrWIrkEU9p699oNWeT4q_fCks5Yx2R7wA%3D%3D)
+
+## Add Login component
+Create and download [`src/Login/background.jpeg`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/Login/background.jpeg?token=ADwMBzjx0_E-Ve5d1Wfqw0oEbpMFICHTks5Yx2TPwA%3D%3D)
+
+Create [`src/Login/index.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/Login/index.js?token=ADwMB7Hrl56X8jkLJdDefqtyFFdXafHLks5Yx2StwA%3D%3D)
+
+Create [`src/Login/login.css`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/Login/login.css?token=ADwMB6g2bYy-Ur_bTn-xWLwjnVaMDweJks5Yx2UDwA%3D%3D)
+
+## Add fetch and storage utilties
+Create [`src/utility/fetch.utility.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/utility/fetch.utility.js?token=ADwMB95d2hU3NLUviNgXkeuFQsG2NUwsks5Yx2YKwA%3D%3D)
+
+Create [`src/utility/storage.utility.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-five/src/utility/storage.utility.js?token=ADwMB_Rl3u89qkCJCe4fvANs_pJ94Axjks5Yx2YkwA%3D%3D)
 
 ## Let's ensure Electron is up and running
 `npm run start`
 
-Wait - Do What! Our app opened in a browser!  This is react-scripts doing it's thing and firing up webpack-dev-server / opening the browser.  
+## Fire up .NET core api and mongo db @see [dot-net-st-pete-api](https://github.com/johnrhampton/dot-net-st-pete-api/blob/master/README.md)
 
-Let's open a new terminal window and run `npm run electron`
-
-We should now see our new React app open up within Electron, and our Dev Tools are back!
-
-If we make a change to our app - we will see Electron refresh as expected
-
-Pretty cool - we can now use React and react-scripts within our Electron app!
-
-[Continue to Step 4](https://github.com/johnrhampton/dot-net-st-pete-ui/tree/step-four)
-
+## What's Missing?
+* Packaging our app for deployment
+* Using Electron libraries for http requests - we are using node-fetch
+* Compile when changes are made to electron modules outside of our webpack bundle
+* Creating our own fork of react-scripts specifically built for Electron
+* Testing with mocha, chai, or any other preferred framework
+* Redux for state management
 
