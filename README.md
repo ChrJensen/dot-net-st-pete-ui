@@ -12,6 +12,31 @@ Each `step-[x]` branch in this repository is a completed solution set.  The `REA
 1. Fork `https://github.com/johnrhampton/dot-net-st-pete-ui` to your personal GitHub
 1. In a shell, execute `git clone https://github.com/[your GH username]/dot-net-st-pete-ui.git`
 1. In a shell, execute `cd dot-net-st-pete-ui`
-1. Execute `git checkout step-one`
+1. In a shell, execute `git checkout initial`
+
+# How we got here
+
+## Initialize project and Install Electron package
+`npm init`
+
+`npm install electron --save-dev`
+
+## Open project in Editor of choice
+
+## Add start script
+`"start": "node src/app",`
+
+## Add app.js
+* Create `src/app.js`
+* Add a console log
+```javascript
+/**
+ * electron app main entry point
+ */
+console.log('electron app');
+```
+
+## Let's ensure node is up and running
+`npm run start`
 
 [Continue to Step 1](https://github.com/johnrhampton/dot-net-st-pete-ui/tree/step-one)
