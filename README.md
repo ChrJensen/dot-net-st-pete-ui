@@ -53,7 +53,7 @@ Create [`src/beer-journal/index.js`](https://raw.githubusercontent.com/johnrhamp
 ## Let's ensure Electron is up and running
 `npm run start`
 
-Notice we don't see our console.log in the terminal - open Dev Tools (CMD + OPT + I) and look at the console!  Our beer-journal feature is a `renderer process`!
+Notice we don't see our console.log in the terminal - open Dev Tools (CMD + OPT + I) and look at the console.  Our beer-journal feature is a `renderer process`!
 
 [Continue to Step 2](https://github.com/johnrhampton/dot-net-st-pete-ui/tree/step-two)
 
