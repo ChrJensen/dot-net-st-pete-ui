@@ -32,7 +32,7 @@ npm install foreman --save
 Create [`config/start-electron.js`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-four/config/start-electron.js?token=ADwMB_fWNDwdlde42HXusWy6LGrF1QOKks5Yx1s7wA%3D%3D)
 
 ## Add Profile to tell foreman what to do 
-Create [`Procfile`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-four/Procfile?token=ADwMBwnVGZTD53k-9HWVjux_Nk4WQiBwks5Yx1wpwA%3D%3D)
+Create [`./Procfile`](https://raw.githubusercontent.com/johnrhampton/dot-net-st-pete-ui/step-four/Procfile?token=ADwMBwnVGZTD53k-9HWVjux_Nk4WQiBwks5Yx1wpwA%3D%3D)
 
 Our Procfile file tells foreman to create two processes. Once the react process is finished, we start the electron process.
 ```javascript
