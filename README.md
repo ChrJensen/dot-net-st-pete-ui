@@ -121,11 +121,13 @@ Create [`src/utility/storage.utility.js`](https://raw.githubusercontent.com/john
 
 ## Fire up .NET core api and mongo db @see [dot-net-st-pete-api](https://github.com/johnrhampton/dot-net-st-pete-api/blob/master/README.md)
 
+Let's open up Postman to create a new user and login to our application.
+
 ## What's Missing?
 * Packaging our app for deployment
+* Ability to create a new user via the UI
 * Using Electron libraries for http requests - we are using node-fetch
 * Compile when changes are made to electron modules outside of our webpack bundle
 * Creating our own fork of react-scripts specifically built for Electron
 * Testing with mocha, chai, or any other preferred framework
 * Redux for state management
-
