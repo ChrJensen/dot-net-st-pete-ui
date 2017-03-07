@@ -1,4 +1,3 @@
-# dot-net-st-pete-ui 
 # Beer Journal w/ Electron (March 7th, 2017)
 
 Welcome to **Building a Beer Journal w/ Electron, .NET Core, and MongoDB**! In this presentation we will build an Electron application with simple authorization against a .NET core API.  We will be able to create new beer journal entries, and edit / review existing entries.
